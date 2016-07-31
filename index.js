@@ -51,8 +51,7 @@ function mqttlockAccessory(log, config) {
     //console.log(that.payloadisjson);
     if (topic == that.topics.getOn) {
         var status = JSON.parse(message);
-        that.on = (status[that.payloadname] == that.payloadon ? "lock" : "unlock");
-        //console.log('recv msg json: ' + that.on + ' topic: ' + that.topics.getOn);
+        that.on = (status[that.payloadname] == that.payloadon ? Characteristic.LockCurrentState.SECURED : Characteristic.LockCurrentState.UNSECURED);
         that.service.getCharacteristic(Characteristic.LockCurrentState).setValue(that.on, undefined, 'fromSetValue'); 
     }
   });
